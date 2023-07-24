@@ -15,7 +15,8 @@
     "paths": {
       //路径映射，相对于baseUrl
       "@/*": ["src/*"]
-    }
+    },
+    "lib": ["ES2015"]
   },
   "include": [
     "src/**/*.ts",

@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import '@/styles/index.scss'
+import pinia from './stores'
 import router from './router'
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css'
@@ -12,7 +13,7 @@ import gloabComponent from './components'
 
 const app = createApp(App)
 
-app.use(createPinia())
+app.use(pinia)
 
 app.use(router)
 
