@@ -4,6 +4,9 @@ import { User, Lock } from '@element-plus/icons-vue'
 import { ElNotification } from 'element-plus'
 import { useUserStore } from '@/stores/modules/user'
 import { useRouter } from 'vue-router'
+import { getTime } from '@/utils/time'
+import {validatorUsername, validatorPassword} from '@/utils/validate'
+
 const userStore = useUserStore()
 
 const loginForm = reactive({ username: 'admin', password: '111111' })
@@ -12,14 +15,19 @@ const loading = ref(false)
 
 const $router = useRouter()
 
+const loginFormRef = ref()
+
 const login = async () => {
+  await loginFormRef.value.validate();
+
   loading.value = true
   try {
     await userStore.userLogin(loginForm)
     $router.push('/')
     ElNotification({
       type: 'success',
-      message: '登录成功'
+      message: '欢迎回来',
+      title: `HI,${getTime()}好`
     })
     loading.value = false
   } catch (error) {
@@ -30,6 +38,11 @@ const login = async () => {
     })
   }
 }
+
+const rules = reactive({
+  username: [{ trigger: 'change', validator: validatorUsername }],
+  password: [{ trigger: 'change', validator: validatorPassword }]
+})
 </script>
 
 <template>
@@ -37,9 +50,9 @@ const login = async () => {
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login_form">
+        <el-form class="login_form" :model="loginForm" :rules="rules" ref="loginFormRef">
           <div class="login_title">Vue3-Admin</div>
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input
               placeholder="请输入账号"
               :prefix-icon="User"
@@ -47,7 +60,7 @@ const login = async () => {
               v-model="loginForm.username"
             ></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input
               placeholder="请输入密码"
               :prefix-icon="Lock"
