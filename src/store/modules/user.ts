@@ -7,12 +7,13 @@ import type {
 } from '@/api/user/type'
 import type { UserState } from '../types/type'
 import { reqLogin, reqUserInfo } from '@/api/user'
-import {SET_TOKEN, GET_TOKEN} from '@/utils/token'
-
-export const useUserStore = defineStore(Names.User, {
+import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
+import { constantRoute } from '@/router/routes'
+ const useUserStore = defineStore(Names.User, {
   state: (): UserState => {
     return {
-      token: GET_TOKEN()
+      token: GET_TOKEN(),
+      menuRoutes: constantRoute
     }
   },
   getters: {},
@@ -29,3 +30,4 @@ export const useUserStore = defineStore(Names.User, {
     }
   }
 })
+export default useUserStore

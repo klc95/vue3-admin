@@ -1,50 +1,3 @@
-<script setup lang="ts">
-import { ref, reactive } from 'vue'
-import { User, Lock } from '@element-plus/icons-vue'
-import { ElNotification } from 'element-plus'
-import { useUserStore } from '@/stores/modules/user'
-import { useRouter } from 'vue-router'
-import { getTime } from '@/utils/time'
-import {validatorUsername, validatorPassword} from '@/utils/validate'
-
-const userStore = useUserStore()
-
-const loginForm = reactive({ username: 'admin', password: '111111' })
-
-const loading = ref(false)
-
-const $router = useRouter()
-
-const loginFormRef = ref()
-
-const login = async () => {
-  await loginFormRef.value.validate();
-
-  loading.value = true
-  try {
-    await userStore.userLogin(loginForm)
-    $router.push('/')
-    ElNotification({
-      type: 'success',
-      message: '欢迎回来',
-      title: `HI,${getTime()}好`
-    })
-    loading.value = false
-  } catch (error) {
-    loading.value = false
-    ElNotification({
-      type: 'error',
-      message: error.message
-    })
-  }
-}
-
-const rules = reactive({
-  username: [{ trigger: 'change', validator: validatorUsername }],
-  password: [{ trigger: 'change', validator: validatorPassword }]
-})
-</script>
-
 <template>
   <div class="login_container">
     <el-row>
@@ -86,6 +39,53 @@ const rules = reactive({
   </div>
 </template>
 
+<script setup lang="ts">
+import { useUserStore } from '@/stores/modules/user'
+import { getTime } from '@/utils/time'
+import { validatorPassword, validatorUsername } from '@/utils/validate'
+import { Lock, User } from '@element-plus/icons-vue'
+import { ElNotification } from 'element-plus'
+import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const userStore = useUserStore()
+
+const loginForm = reactive({ username: 'admin', password: '111111' })
+
+const loading = ref(false)
+
+const $router = useRouter()
+
+const loginFormRef = ref()
+
+const login = async () => {
+  await loginFormRef.value.validate();
+
+  loading.value = true
+  try {
+    await userStore.userLogin(loginForm)
+    $router.push('/')
+    ElNotification({
+      type: 'success',
+      message: '欢迎回来',
+      title: `HI,${getTime()}好`
+    })
+    loading.value = false
+  } catch (error) {
+    loading.value = false
+    ElNotification({
+      type: 'error',
+      message: error.message
+    })
+  }
+}
+
+const rules = reactive({
+  username: [{ trigger: 'change', validator: validatorUsername }],
+  password: [{ trigger: 'change', validator: validatorPassword }]
+})
+</script>
+
 <style scoped lang="scss">
 .login_container {
   width: 100%;
@@ -113,3 +113,4 @@ const rules = reactive({
   }
 }
 </style>
+@/store/modules/user
