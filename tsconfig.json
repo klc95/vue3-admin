@@ -16,7 +16,7 @@
       //路径映射，相对于baseUrl
       "@/*": ["src/*"]
     },
-    "lib": ["ES2015"]
+    "lib": ["ES2015", "dom"]
   },
   "include": [
     "src/**/*.ts",

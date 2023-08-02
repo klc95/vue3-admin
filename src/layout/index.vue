@@ -1,27 +1,46 @@
 <template>
   <div class="layout_container">
-    <div class="slider">
+    <div
+      class="layout_slider"
+      :class="{ fold: LayOutSettingStore.fold ? true : false }"
+    >
       <Logo></Logo>
       <el-scrollbar class="scrollbar">
-        <el-menu background-color="#001529" text-color="white">
+        <el-menu
+          :collapse="LayOutSettingStore.fold ? true : false"
+          :default-active="$route.path"
+          background-color="#001529"
+          text-color="white"
+        >
           <Menu :menuList="userStore.menuRoutes"></Menu>
         </el-menu>
       </el-scrollbar>
     </div>
-    <div class="tabbar">
-      <div class="head_portrait"></div>
+    <div
+      class="layout_tabbar"
+      :class="{ fold: LayOutSettingStore.fold ? true : false }"
+    >
+      <Tabbar></Tabbar>
     </div>
-    <div class="main">
-      <router-view></router-view>
+    <div
+      class="layout_main"
+      :class="{ fold: LayOutSettingStore.fold ? true : false }"
+    >
+      <Main></Main>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
 import Logo from './logo/index.vue'
 import Menu from './menu/index.vue'
+import Main from './main/index.vue'
+import Tabbar from './tabbar/index.vue'
 import useUserStore from '@/store/modules/user'
+import useLayOutSettingStore from '@/store/modules/setting'
+
+let LayOutSettingStore = useLayOutSettingStore()
+
 let userStore = useUserStore()
 </script>
 
@@ -29,37 +48,36 @@ let userStore = useUserStore()
 .layout_container {
   width: 100%;
   height: 100vh;
-  background: $base-menu-background;
-  .slider {
+  .layout_slider {
+    color: $base-menu-color;
+    background-color: $base-menu-background;
     width: $base-menu-width;
     height: 100vh;
-    // background: skyblue;
+    transition: all 0.3s;
+    &.fold {
+      width: $base-menu-min-width;
+    }
     .scrollbar {
       height: calc(100vh - $base-menu-logo-height);
       .el-menu {
-                border-right: none;
-           }
+        border-right: none;
+      }
     }
   }
-  .tabbar {
+  .layout_tabbar {
     width: calc(100% - $base-menu-width);
     height: $base-tabbar-height;
     background: $base-tabbar-background;
     position: fixed;
     top: 0;
     left: $base-menu-width;
-    display: flex;
-    align-items: center;
-    .head_portrait {
-      width: calc($base-tabbar-height - 10px);
-      height: calc($base-tabbar-height - 10px);
-      border: 1px solid black;
-      border-radius: 50%;
-      position: fixed;
-      right: 15px;
+    transition: all 0.3s;
+    &.fold {
+      width: calc(100vw - $base-menu-min-width) !important;
+      left: $base-menu-min-width;
     }
   }
-  .main {
+  .layout_main {
     position: absolute;
     width: calc(100% - $base-menu-width);
     height: calc(100vh - $base-tabbar-height);
@@ -68,6 +86,11 @@ let userStore = useUserStore()
     left: $base-menu-width;
     padding: 20px;
     overflow: hidden;
+    transition: all 0.3s;
+    &.fold {
+      width: calc(100vw - $base-menu-min-width) !important;
+      left: $base-menu-min-width;
+    }
   }
 }
 </style>

@@ -1,4 +1,5 @@
-$color: red;
+// 左侧菜单颜色
+$base-menu-color: #FFF;
 
 // 左侧菜单的背景颜色
 $base-menu-background: #001529;
@@ -11,12 +12,13 @@ $base-logo-title-fontSize: 20px;
 
 // 左侧的菜单宽度
 $base-menu-width: 200px;
+$base-menu-min-width: 50px;
 
 // 顶部导航高度
 $base-tabbar-height: 50px;
 
 // 顶部导航背景
-$base-tabbar-background: cyan;
+$base-tabbar-background: #FFF;
 
 // 内容区背景颜色
 $base-main-background: yellowgreen;

@@ -9,7 +9,7 @@ import type { UserState } from '../types/type'
 import { reqLogin, reqUserInfo } from '@/api/user'
 import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
 import { constantRoute } from '@/router/routes'
- const useUserStore = defineStore(Names.User, {
+ const useUserStore = defineStore(Names.UserStore, {
   state: (): UserState => {
     return {
       token: GET_TOKEN(),

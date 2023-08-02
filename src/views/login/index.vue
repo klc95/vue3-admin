@@ -3,7 +3,12 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login_form" :model="loginForm" :rules="rules" ref="loginFormRef">
+        <el-form
+          class="login_form"
+          :model="loginForm"
+          :rules="rules"
+          ref="loginFormRef"
+        >
           <div class="login_title">Vue3-Admin</div>
           <el-form-item prop="username">
             <el-input
@@ -40,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/stores/modules/user'
+import useUserStore from '@/store/modules/user'
 import { getTime } from '@/utils/time'
 import { validatorPassword, validatorUsername } from '@/utils/validate'
 import { Lock, User } from '@element-plus/icons-vue'
@@ -59,7 +64,7 @@ const $router = useRouter()
 const loginFormRef = ref()
 
 const login = async () => {
-  await loginFormRef.value.validate();
+  await loginFormRef.value.validate()
 
   loading.value = true
   try {
