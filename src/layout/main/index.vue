@@ -9,8 +9,11 @@
 <script setup lang="ts">
 import { nextTick, ref, watch } from 'vue'
 import useLayOutSettingStore from '@/store/modules/setting';
-let LayOutSettingStore = useLayOutSettingStore();
+
+const LayOutSettingStore = useLayOutSettingStore();
+
 let flag = ref(true)
+
 watch(() => LayOutSettingStore.refresh, () => {
   flag.value = false;
   nextTick(() => {

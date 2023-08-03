@@ -4,8 +4,8 @@ import { Names } from '../store-namespace'
 const useLayOutSettingStore = defineStore(Names.SettingStore, {
   state: () => {
     return {
-      fold: false,  
-      refresh: false, 
+      fold: false,
+      refresh: false,
     }
   },
 })

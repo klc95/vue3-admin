@@ -9,6 +9,7 @@ import pinia from './store'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import 'virtual:svg-icons-register'
 import gloabComponent from './components'
+import './permission'
 
 const app = createApp(App)
 

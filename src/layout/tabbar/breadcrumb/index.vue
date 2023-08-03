@@ -20,7 +20,8 @@
 <script setup lang="ts">
 import useLayOutSettingStore from '@/store/modules/setting'
 
-let LayOutSettingStore = useLayOutSettingStore()
+const LayOutSettingStore = useLayOutSettingStore()
+
 const changeIcon = () => {
   LayOutSettingStore.fold = !LayOutSettingStore.fold
 }

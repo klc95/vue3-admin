@@ -5,7 +5,7 @@ export interface LoginFormData {
 }
 
 // 定义接口返回数据类型
-export interface LoginResponseData  {
+export interface LoginResponseData {
   code: number;
   data: {
     token?: string;
@@ -17,7 +17,7 @@ interface UserInfo {
   userId: number;
   avatar: string;
   username: string;
-  password:string;
+  password: string;
   desc: string;
   roles: string[];
   buttons: string[];
@@ -34,3 +34,5 @@ export interface UserInfoResponseData {
   code: number;
   data: User;
 }
+
+

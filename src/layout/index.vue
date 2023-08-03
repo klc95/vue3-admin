@@ -1,9 +1,6 @@
 <template>
   <div class="layout_container">
-    <div
-      class="layout_slider"
-      :class="{ fold: LayOutSettingStore.fold ? true : false }"
-    >
+    <div class="layout_slider">
       <Logo></Logo>
       <el-scrollbar class="scrollbar">
         <el-menu
@@ -39,9 +36,9 @@ import Tabbar from './tabbar/index.vue'
 import useUserStore from '@/store/modules/user'
 import useLayOutSettingStore from '@/store/modules/setting'
 
-let LayOutSettingStore = useLayOutSettingStore()
+const LayOutSettingStore = useLayOutSettingStore()
 
-let userStore = useUserStore()
+const userStore = useUserStore()
 </script>
 
 <style scoped lang="scss">

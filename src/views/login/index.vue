@@ -51,17 +51,19 @@ import { validatorPassword, validatorUsername } from '@/utils/validate'
 import { Lock, User } from '@element-plus/icons-vue'
 import { ElNotification } from 'element-plus'
 import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 const userStore = useUserStore()
 
 const loginForm = reactive({ username: 'admin', password: '111111' })
 
-const loading = ref(false)
+let loading = ref(false)
 
 const $router = useRouter()
 
-const loginFormRef = ref()
+const $route = useRoute()
+
+let loginFormRef = ref()
 
 const login = async () => {
   await loginFormRef.value.validate()
@@ -69,7 +71,8 @@ const login = async () => {
   loading.value = true
   try {
     await userStore.userLogin(loginForm)
-    $router.push('/')
+    let redirect: any = $route.query.redirect
+    $router.push({ path: redirect || '/' })
     ElNotification({
       type: 'success',
       message: '欢迎回来',
