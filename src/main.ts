@@ -10,6 +10,7 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import 'virtual:svg-icons-register'
 import gloabComponent from './components'
 import './permission'
+import { isHasButton } from './directive/has'
 
 const app = createApp(App)
 
@@ -22,5 +23,7 @@ app.use(ElementPlus, {
 })
 
 app.use(gloabComponent)
+
+isHasButton(app)
 
 app.mount('#app')

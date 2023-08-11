@@ -2,8 +2,8 @@ import router from '@/router'
 import setting from './setting'
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
-import pinia from './store'
-import useUserStore from './store/modules/user'
+import pinia from '@/store'
+import useUserStore from '@/store/modules/user'
 
 nprogress.configure({ showSpinner: false })
 const userStore = useUserStore(pinia)
@@ -23,7 +23,7 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           await userStore.userInfo()
-          next()
+          next({...to})
         } catch (error) {
           await userStore.userLogout()
           next({ path: '/login', query: { redirect: to.path } })

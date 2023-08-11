@@ -9,9 +9,9 @@ function createUserList() {
       password: '111111',
       desc: '平台管理员',
       roles: ['平台管理员'],
-      buttons: ['cuser.detail'],
-      routes: ['home'],
-      token: 'Admin Token'
+      buttons: ['cuser.detail', 'cuser.user'],
+      routes: ['Acl', 'User', 'Role', 'Permission'],
+      token: 'Admin Token',
     },
     {
       userId: 2,
@@ -21,8 +21,8 @@ function createUserList() {
       password: '111111',
       desc: '系统管理员',
       roles: ['系统管理员'],
-      buttons: ['cuser.detail', 'cuser.user'],
-      routes: ['home'],
+      buttons: ['cuser.detail'],
+      routes: ['Acl', 'User', 'Permission'],
       token: 'System Token'
     }
   ]
