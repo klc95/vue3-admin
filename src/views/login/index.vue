@@ -33,6 +33,7 @@
               class="login_btn"
               size="default"
               @click="login"
+              @keydown.enter="keyDown"
               :loading="loading"
             >
               登录
@@ -50,8 +51,16 @@ import { getTime } from '@/utils/time'
 import { validatorPassword, validatorUsername } from '@/utils/validate'
 import { Lock, User } from '@element-plus/icons-vue'
 import { ElNotification } from 'element-plus'
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+
+onMounted(() => {
+	window.addEventListener('keydown', keyDown)
+});
+
+onUnmounted(() => {
+	window.removeEventListener('keydown', keyDown, false)
+});
 
 const userStore = useUserStore()
 
@@ -85,6 +94,12 @@ const login = async () => {
       type: 'error',
       message: error.message
     })
+  }
+}
+
+const keyDown = (e) => {
+  if(e.keyCode === 13) {
+    login()
   }
 }
 
